@@ -1,0 +1,9 @@
+﻿@model List<PasswordReset>
+
+@foreach (PasswordReset p in Model)
+{
+    <p>@p.Id</p>
+    <p>@p.UserName</p>
+    <p>@p.UserEmail</p>
+    <hr>
+}

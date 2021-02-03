@@ -1,0 +1,33 @@
+﻿<h2>User Functions</h2>
+
+<form asp-controller="UserFunction" asp-action="ShowUsers" method="post">
+    <input type="submit" value="show all users"/>
+</form>
+
+<hr>
+
+<form asp-controller="UserFunction" asp-action="AddUsername" method="post">
+    <label>Enter username:</label>
+    <input type="text" name="UserName" />
+    <br>
+    <label>Enter email:</label>
+    <input type="text" name="UserEmail" />
+    <br>
+    <label>Enter password:</label>
+    <input type="text" name="Password" />
+    <br>
+    <label>Enter has reset code been sent?:</label>
+    <input type="radio" id="true" name="ResetCodeSent" value="true" />
+    <label for="true">true</label>
+    <input type="radio" id="false" name="ResetCodeSent" value="false" />
+    <label for="false">false</label>
+    <br>
+    <label>current time:</label>
+    <input type="text" name="ResetCodeTimestamp" value="@DateTime.Now" />
+    <br>
+    <label>Enter ResetCode:</label>
+    <input type="text" name="ResetCode" />
+    <br>
+    <input type="submit">
+
+</form>

@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using testing_ctrl_portal.Data;
+using testing_ctrl_portal.Models;
 
 namespace testing_ctrl_portal
 {
@@ -27,6 +28,9 @@ namespace testing_ctrl_portal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<CTRL_TestingContext>(options =>
+                   options.UseSqlServer(
+                       Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
