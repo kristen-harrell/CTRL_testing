@@ -2,7 +2,7 @@
 
 @*testing to be sure I can view that entries to database have been recorded*@
 <form asp-controller="UserFunction" asp-action="ShowUsers" method="post">
-    <input type="submit" value="show all users"/>
+    <input type="submit" value="show all users" />
 </form>
 
 <hr>
@@ -17,13 +17,13 @@
     <label>Enter password:</label>
     <input type="text" name="Password" />
     <br>
-    <label>Enter has reset code been sent?:</label>
+    <label>Has reset code been sent?:</label>
     <input type="radio" id="true" name="ResetCodeSent" value="true" />
     <label for="true">true</label>
     <input type="radio" id="false" name="ResetCodeSent" value="false" />
     <label for="false">false</label>
     <br>
-    <label>current time:</label>
+    <label>Current time:</label>
     <input type="text" name="ResetCodeTimestamp" value="@DateTime.Now" />
     <br>
     <label>Enter ResetCode:</label>
@@ -47,5 +47,21 @@
 
 @*Write code to databse*@
 <form asp-action="SaveCode" asp-controller="UserFunction" method="post">
+    <p>Need a password reset code?  Enter your email below and click submit</p>
+    <input type="text" name="email" />
+    <input type="submit" />
 
 </form>
+<p>@ViewBag.Confirmation</p>
+
+@*check to see if reset code is valid to proceed with password reset*@
+
+<form asp-action="validateCode" asp-controller="userfunction" method="post">
+    <p>enter the code you received here to proceed with resetting your password:</p>
+    <input type="text" name="code" />
+    <input type="submit" />
+
+</form>
+<p>@ViewBag.CodeResponse</p>
+
+
