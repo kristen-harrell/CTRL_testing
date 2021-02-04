@@ -1,11 +1,12 @@
 ﻿<h2>User Functions</h2>
 
+@*testing to be sure I can view that entries to database have been recorded*@
 <form asp-controller="UserFunction" asp-action="ShowUsers" method="post">
     <input type="submit" value="show all users"/>
 </form>
 
 <hr>
-
+@*testing writability to the database in this form block*@
 <form asp-controller="UserFunction" asp-action="AddUsername" method="post">
     <label>Enter username:</label>
     <input type="text" name="UserName" />
@@ -29,5 +30,22 @@
     <input type="text" name="ResetCode" />
     <br>
     <input type="submit">
+
+</form>
+<hr>
+
+@*testing ability to generate 6 digit alphanumeric code on demand*@
+<form asp-action="SendCode" asp-controller="UserFunction" method="post">
+    <label>Click here to get a reset code:</label>
+    <input type="submit" value="show me a code" />
+
+</form>
+
+<p>@ViewBag.Resetcode</p>
+
+<hr>
+
+@*Write code to databse*@
+<form asp-action="SaveCode" asp-controller="UserFunction" method="post">
 
 </form>

@@ -2,8 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-#nullable disable
-
 namespace testing_ctrl_portal.Models
 {
     public partial class CTRL_TestingContext : DbContext
@@ -17,7 +15,8 @@ namespace testing_ctrl_portal.Models
         {
         }
 
-        public virtual DbSet<PasswordReset> PasswordResets { get; set; }
+        public virtual DbSet<PasswordReset> PasswordReset { get; set; }
+        public virtual DbSet<PersistCode> PersistCode { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,33 +28,38 @@ namespace testing_ctrl_portal.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
-
             modelBuilder.Entity<PasswordReset>(entity =>
             {
-                entity.ToTable("PasswordReset");
-
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Password).HasMaxLength(25);
 
                 entity.Property(e => e.ResetCode)
-                    .HasMaxLength(25)
-                    .HasColumnName("Reset_code");
+                    .HasColumnName("Reset_code")
+                    .HasMaxLength(25);
 
                 entity.Property(e => e.ResetCodeSent).HasColumnName("Reset_code_sent");
 
                 entity.Property(e => e.ResetCodeTimestamp)
-                    .HasColumnType("datetime")
-                    .HasColumnName("Reset_code_timestamp");
+                    .HasColumnName("Reset_code_timestamp")
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.UserEmail)
-                    .HasMaxLength(100)
-                    .HasColumnName("User_Email");
+                    .HasColumnName("User_Email")
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.UserName)
-                    .HasMaxLength(100)
-                    .HasColumnName("User_Name");
+                    .HasColumnName("User_Name")
+                    .HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<PersistCode>(entity =>
+            {
+                entity.Property(e => e.Email).HasMaxLength(100);
+
+                entity.Property(e => e.Expiration).HasColumnType("datetime");
+
+                entity.Property(e => e.ResetCode).HasMaxLength(6);
             });
 
             OnModelCreatingPartial(modelBuilder);
